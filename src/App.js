@@ -32,7 +32,7 @@ const testData = [
 ];
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [enteringData, setEnteringData] = useState(false);
 
   // enter hours and # of students logic
@@ -87,7 +87,7 @@ function App() {
 
   const handleClearData = () => {
     setEnteredStudents([]);
-    setData([]);
+    setData(null);
     setMaxCreditHours("");
     setNumOfStudents("");
     setEnteringData(false);
@@ -151,8 +151,15 @@ function App() {
           </table>
         </>
       )}
-      <BestCombination potentialStudents={data} totalHours={maxCreditHours} />
-      <button onClick={handleClearData}>Clear Data</button>
+      {data && (
+        <>
+          <BestCombination
+            potentialStudents={data}
+            totalHours={maxCreditHours}
+          />
+          <button onClick={handleClearData}>Clear Data</button>
+        </>
+      )}
     </div>
   );
 }
