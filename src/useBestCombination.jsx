@@ -1,5 +1,4 @@
-// efficient produce powerset with generator function
-function* subsets(array, offset = 1) {
+function* subsets(array, offset = 0) {
   while (offset < array.length) {
     let first = array[offset++];
     for (let subset of subsets(array, offset)) {
@@ -10,57 +9,33 @@ function* subsets(array, offset = 1) {
   yield [];
 }
 
-// inefficient produce powerset
-const getAllSubsets = (arr) =>
-  arr.reduce(
-    (subsets, value) => subsets.concat(subsets.map((set) => [value, ...set])),
-    [[]]
-  );
-
-// serialize subsets with toatals
-function totalSubsetsEarningsAndHours(powerSet, dataSet) {
-  return powerSet.map((combo) => {
-    const totalHours = dataSet.reduce((total, student) => {
-      if (combo.includes(student.name)) {
-        return (total += student.hours);
-      } else {
-        return total;
-      }
-    }, 0);
-    const totalEarnings = dataSet.reduce((total, student) => {
-      if (combo.includes(student.name)) {
-        return (total += student.earnings);
-      } else {
-        return total;
-      }
-    }, 0);
-
-    return {
-      possibleCombination: combo,
-      possibleEarnings: totalEarnings,
-      totalHours: totalHours,
-    };
-  });
-}
-
 function useBestCombination(potentialStudents, totalHours) {
-  const flattenArrayByName = potentialStudents.map((student) => student.name);
-  const powerSetArrayByNames = getAllSubsets(flattenArrayByName);
-  const powerSetWithTotals = totalSubsetsEarningsAndHours(
-    powerSetArrayByNames,
-    potentialStudents
-  );
+  const powerSetWithTotals = [];
+  for (let subset of subsets(potentialStudents)) {
+    const totals = subset.reduce(
+      (totals, student) => {
+        totals.totalEarnings += student.earnings;
+        totals.totalHours += student.hours;
+        return totals;
+      },
+      { totalEarnings: 0, totalHours: 0 }
+    );
+    powerSetWithTotals.push({
+      possibleCombination: [...subset],
+      possibleEarnings: totals.totalEarnings,
+      totalHours: totals.totalHours,
+    });
+  }
   const sortedData = powerSetWithTotals.sort((s1, s2) =>
-    s1.totalEarings > s2.totalEarings
+    s1.possibleEarnings < s2.possibleEarnings
       ? 1
-      : s1.totalEarings < s2.totalEarings
+      : s1.possibleEarnings > s2.possibleEarnings
       ? -1
       : 0
   );
-
-  const bestCombination = sortedData
-    .reverse()
-    .find((subset) => subset.totalHours <= totalHours);
+  const bestCombination = sortedData.find(
+    (subset) => subset.totalHours <= totalHours
+  );
   return bestCombination;
 }
 
