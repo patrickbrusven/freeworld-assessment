@@ -1,6 +1,7 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BaseInput from "./BaseInput";
+import BestCombination from "./BestCombination";
 
 const testData = [
   {
@@ -30,76 +31,9 @@ const testData = [
   },
 ];
 
-// efficient produce powerset with generator function
-function* subsets(array, offset = 1) {
-  while (offset < array.length) {
-    let first = array[offset++];
-    for (let subset of subsets(array, offset)) {
-      subset.push(first);
-      yield subset;
-    }
-  }
-  yield [];
-}
-
-// inefficient produce powerset
-const getAllSubsets = (arr) =>
-  arr.reduce(
-    (subsets, value) => subsets.concat(subsets.map((set) => [value, ...set])),
-    [[]]
-  );
-
-// serialize subsets with toatals
-function totalSubsetsEarningsAndHours(powerSet, dataSet) {
-  return powerSet.map((combo) => {
-    const totalHours = dataSet.reduce((total, student) => {
-      if (combo.includes(student.name)) {
-        return (total += student.hours);
-      } else {
-        return total;
-      }
-    }, 0);
-    const totalEarnings = dataSet.reduce((total, student) => {
-      if (combo.includes(student.name)) {
-        return (total += student.earnings);
-      } else {
-        return total;
-      }
-    }, 0);
-
-    return {
-      possibleCombination: combo,
-      possibleEarnings: totalEarnings,
-      totalHours: totalHours,
-    };
-  });
-}
-
 function App() {
-  const [data, setData] = useState([]);
-  const [bestCombination, setBestCombination] = useState(null);
+  const [data, setData] = useState(null);
   const [enteringData, setEnteringData] = useState(false);
-
-  const findBestCombination = (potentialStudents, totalHours) => {
-    const flattenArrayByName = potentialStudents.map((student) => student.name);
-    const powerSetArrayByNames = getAllSubsets(flattenArrayByName);
-    const powerSetWithTotals = totalSubsetsEarningsAndHours(
-      powerSetArrayByNames,
-      testData
-    );
-    const sortedData = powerSetWithTotals.sort((s1, s2) =>
-      s1.totalEarings > s2.totalEarings
-        ? 1
-        : s1.totalEarings < s2.totalEarings
-        ? -1
-        : 0
-    );
-
-    const bestCombination = sortedData
-      .reverse()
-      .find((subset) => subset.totalHours <= totalHours);
-    return bestCombination;
-  };
 
   // enter hours and # of students logic
   const [maxCreditHours, setMaxCreditHours] = useState("");
@@ -114,10 +48,6 @@ function App() {
   const handleProceede = () => {
     setEnteringData(true);
   };
-
-  useEffect(() => {
-    setBestCombination(findBestCombination(data, maxCreditHours));
-  }, [data, maxCreditHours]);
 
   // enter student data logic
   const [enteredStudents, setEnteredStudents] = useState([]);
@@ -157,7 +87,7 @@ function App() {
 
   const handleClearData = () => {
     setEnteredStudents([]);
-    setData([]);
+    setData(null);
     setMaxCreditHours("");
     setNumOfStudents("");
     setEnteringData(false);
@@ -221,16 +151,12 @@ function App() {
           </table>
         </>
       )}
-      {bestCombination && (
+      {data && (
         <>
-          <h3>Students that have max earning potential for this cohort</h3>
-          <ul>
-            {bestCombination.possibleCombination.map((studentName, index) => (
-              <li key={index}>{studentName}</li>
-            ))}
-          </ul>
-          <p>Max Potential Earnings: ${bestCombination.possibleEarnings}</p>
-          <p>Total Hours: {bestCombination.totalHours}</p>
+          <BestCombination
+            potentialStudents={data}
+            totalHours={maxCreditHours}
+          />
           <button onClick={handleClearData}>Clear Data</button>
         </>
       )}
