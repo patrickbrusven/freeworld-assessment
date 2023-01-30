@@ -1,4 +1,4 @@
-import "./App.css";
+import "./Main.scss";
 import { useState } from "react";
 import EnterConstraints from "./EnterConstraints";
 import EnterStudent from "./EnterStudent";
@@ -34,6 +34,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className="app-heading">Optimize Candidate Selection</h1>
       {maxCreditHours && numOfStudents ? (
         <>
           <p>Max Credit Hours: {maxCreditHours}</p>

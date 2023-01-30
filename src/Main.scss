@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app-heading {
+  color: white;
+  background: black;
+  padding: 25px 16px;
+}
+.freeworld-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  input {
+    padding: 16px 16px;
+    border-style: solid;
+    border-width: 0 0 2px;
+    border-color: #000;
+    border-radius: 0;
+    transition: border-color 0.2s;
+    font-size: 18px;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.base-button {
+  background-color: transparent;
+  font-size: 18px;
+  color: #000;
+  padding: 16px 40px;
+  border: 2px solid #131313;
+  border-radius: 0;
+  font-weight: 700;
+  text-align: center;
+  transition: color 0.2s, background-color 0.2s;
+  &--enabled {
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      background-color: #131313;
+      color: #fff;
+    }
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  &--disabled {
+    cursor: not-allowed;
+    background-color: #ececec;
+    border-color: #808080;
+    color: #808080;
+  }
+}
