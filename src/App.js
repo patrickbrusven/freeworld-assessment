@@ -84,7 +84,7 @@ function App() {
           numOfStudents={numOfStudents}
         />
       )}
-      {enteredStudents && (
+      {enteredStudents && enteredStudents.length >= 1 && (
         <>
           <table>
             <thead>
