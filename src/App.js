@@ -6,7 +6,7 @@ import BestCombination from "./BestCombination";
 
 function App() {
   const [data, setData] = useState(null);
-  const [enteringData, setEnteringStudents] = useState(false);
+  const [enteringStudents, setEnteringStudents] = useState(false);
 
   // constraints logic
   const [maxCreditHours, setMaxCreditHours] = useState("");
@@ -42,7 +42,7 @@ function App() {
       ) : (
         <EnterConstraints handleSubmitedConstraints={handleConstraints} />
       )}
-      {enteringData && (
+      {enteringStudents && (
         <EnterStudent
           handleSubmitedStudent={handleStudent}
           enteredStudents={enteredStudents}
