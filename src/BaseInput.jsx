@@ -3,14 +3,15 @@ import { forwardRef } from "react";
 const BaseInput = forwardRef((props, ref) => {
   const {
     label = "example label",
-    placeholder="example placeholder",
+    placeholder = "example placeholder",
     type = "text",
+    name,
     inputChanged,
     inputValue,
     autoFocus,
   } = props;
   const handleInput = (e) => {
-    inputChanged(e.target.value);
+    inputChanged(e);
   };
   return (
     <label>
@@ -18,6 +19,7 @@ const BaseInput = forwardRef((props, ref) => {
       <input
         autoFocus={autoFocus}
         type={type}
+        name={name}
         placeholder={placeholder}
         value={inputValue}
         onChange={handleInput}
