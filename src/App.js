@@ -1,9 +1,8 @@
 import "./App.css";
 import { useState } from "react";
-import BaseInput from "./BaseInput";
-import BestCombination from "./BestCombination";
+import EnterConstraints from "./EnterConstraints";
 import EnterStudent from "./EnterStudent";
-
+import BestCombination from "./BestCombination";
 const testData = [
   {
     name: "Jane",
@@ -36,26 +35,20 @@ function App() {
   const [data, setData] = useState(null);
   const [enteringData, setEnteringData] = useState(false);
 
-  // enter hours and # of students logic
+  // constraints logic
   const [maxCreditHours, setMaxCreditHours] = useState("");
   const [numOfStudents, setNumOfStudents] = useState("");
 
-  const handleMaxHoursChanged = (e) => {
-    setMaxCreditHours(e.target.value);
-  };
-  const handleNumOfStudentsChanged = (e) => {
-    setNumOfStudents(e.target.value);
-  };
-  const handleProceede = () => {
+  const handleConstraints = (constraints) => {
+    setMaxCreditHours(constraints.maxCreditHours);
+    setNumOfStudents(constraints.numOfStudents);
     setEnteringData(true);
   };
 
   // enter student data logic
   const [enteredStudents, setEnteredStudents] = useState([]);
 
-  const handleSubmitedStudent = (
-    student
-  ) => {
+  const handleSubmitedStudent = (student) => {
     setEnteredStudents((current) => {
       const newStudentArray = [...current, student];
       if (newStudentArray.length === parseInt(numOfStudents)) {
@@ -76,19 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <BaseInput
-        label="Max Credit Hours"
-        placeholder="20"
-        inputChanged={handleMaxHoursChanged}
-        inputValue={maxCreditHours}
-      />
-      <BaseInput
-        label="# of Students for Consideration"
-        placeholder="5"
-        inputChanged={handleNumOfStudentsChanged}
-        inputValue={numOfStudents}
-      />
-      <button onClick={handleProceede}>Proceede to enter Data</button>
+      <EnterConstraints handleSubmitedConstraints={handleConstraints} />
       {enteringData && (
         <EnterStudent
           handleSubmitedStudent={handleSubmitedStudent}
