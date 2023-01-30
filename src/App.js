@@ -69,7 +69,14 @@ function App() {
 
   return (
     <div className="App">
-      <EnterConstraints handleSubmitedConstraints={handleConstraints} />
+      {maxCreditHours && numOfStudents ? (
+        <>
+          <p>Max Credit Hours: {maxCreditHours}</p>
+          <p>Total number of Students: {numOfStudents}</p>
+        </>
+      ) : (
+        <EnterConstraints handleSubmitedConstraints={handleConstraints} />
+      )}
       {enteringData && (
         <EnterStudent
           handleSubmitedStudent={handleStudent}
