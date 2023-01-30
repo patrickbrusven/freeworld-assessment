@@ -32,27 +32,43 @@ function EnterStudent({
   return (
     <>
       <p>
-        entering student {enteredStudents.length + 1} / {numOfStudents}
+        Entering student: {enteredStudents.length + 1} / {numOfStudents}
       </p>
       <form onSubmit={submitStudent} id="enterStudentForm">
         <BaseInput
           autoFocus={true}
-          placeholder="Name"
+          label="Name"
+          placeholder="John"
           inputChanged={handleNamechange}
           inputValue={studentName}
           ref={firstInput}
         />
         <BaseInput
-          placeholder="Earnings Potential"
+          label="Earnings Potential"
+          placeholder="$1,000"
           inputChanged={handleEarningschange}
           inputValue={studentEarnings}
         />
         <BaseInput
-          placeholder="Instruction Hours Needed"
+          label="Instruction Hours Needed"
+          placeholder="5"
           inputChanged={handleHourschange}
           inputValue={studentHours}
         />
-        <button type="submit">Submit Student</button>
+        <button
+          type="submit"
+          disabled={
+            !studentName.length ||
+            !studentEarnings.length ||
+            !studentHours.length
+              ? true
+              : false
+          }
+        >
+          {enteredStudents.length + 1 === parseInt(numOfStudents)
+            ? "Add Student & Generate Best Combination"
+            : "Add Student"}
+        </button>
       </form>
     </>
   );
