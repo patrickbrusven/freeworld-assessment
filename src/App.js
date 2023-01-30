@@ -84,12 +84,14 @@ function App() {
   return (
     <div className="App">
       <BaseInput
-        placeholder="Max Credit Hours"
+        label="Max Credit Hours"
+        placeholder="20"
         inputChanged={handleMaxHoursChanged}
         inputValue={maxCreditHours}
       />
       <BaseInput
-        placeholder="# of Students for Consideration"
+        label="# of Students for Consideration"
+        placeholder="5"
         inputChanged={handleNumOfStudentsChanged}
         inputValue={numOfStudents}
       />
