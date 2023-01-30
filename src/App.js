@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import BaseInput from "./BaseInput";
 import BestCombination from "./BestCombination";
+import EnterStudent from "./EnterStudent";
 
 const testData = [
   {
@@ -39,11 +40,11 @@ function App() {
   const [maxCreditHours, setMaxCreditHours] = useState("");
   const [numOfStudents, setNumOfStudents] = useState("");
 
-  const handleMaxHoursChanged = (num) => {
-    setMaxCreditHours(num);
+  const handleMaxHoursChanged = (e) => {
+    setMaxCreditHours(e.target.value);
   };
-  const handleNumOfStudentsChanged = (num) => {
-    setNumOfStudents(num);
+  const handleNumOfStudentsChanged = (e) => {
+    setNumOfStudents(e.target.value);
   };
   const handleProceede = () => {
     setEnteringData(true);
@@ -52,26 +53,9 @@ function App() {
   // enter student data logic
   const [enteredStudents, setEnteredStudents] = useState([]);
 
-  const [studentName, setStudentName] = useState("");
-  const [studentEarnings, setStudentEarnings] = useState("");
-  const [studentHours, setStudentHours] = useState("");
-
-  const handleNamechange = (string) => {
-    setStudentName(string);
-  };
-  const handleEarningschange = (num) => {
-    setStudentEarnings(num);
-  };
-  const handleHourschange = (num) => {
-    setStudentHours(num);
-  };
-
-  const handleSubmitStudent = () => {
-    const student = {
-      name: studentName,
-      earnings: parseInt(studentEarnings),
-      hours: parseInt(studentHours),
-    };
+  const handleSubmitedStudent = (
+    student
+  ) => {
     setEnteredStudents((current) => {
       const newStudentArray = [...current, student];
       if (newStudentArray.length === parseInt(numOfStudents)) {
@@ -80,9 +64,6 @@ function App() {
       }
       return newStudentArray;
     });
-    setStudentName("");
-    setStudentEarnings("");
-    setStudentHours("");
   };
 
   const handleClearData = () => {
@@ -96,38 +77,24 @@ function App() {
   return (
     <div className="App">
       <BaseInput
-        placeholder="Max Credit Hours"
+        label="Max Credit Hours"
+        placeholder="20"
         inputChanged={handleMaxHoursChanged}
         inputValue={maxCreditHours}
       />
       <BaseInput
-        placeholder="# of Students for Consideration"
+        label="# of Students for Consideration"
+        placeholder="5"
         inputChanged={handleNumOfStudentsChanged}
         inputValue={numOfStudents}
       />
       <button onClick={handleProceede}>Proceede to enter Data</button>
       {enteringData && (
-        <>
-          <p>
-            entering student {enteredStudents.length + 1} / {numOfStudents}
-          </p>
-          <BaseInput
-            placeholder="Name"
-            inputChanged={handleNamechange}
-            inputValue={studentName}
-          />
-          <BaseInput
-            placeholder="Earnings Potential"
-            inputChanged={handleEarningschange}
-            inputValue={studentEarnings}
-          />
-          <BaseInput
-            placeholder="Instruction Hours Needed"
-            inputChanged={handleHourschange}
-            inputValue={studentHours}
-          />
-          <button onClick={handleSubmitStudent}>Submit Student</button>
-        </>
+        <EnterStudent
+          handleSubmitedStudent={handleSubmitedStudent}
+          enteredStudents={enteredStudents}
+          numOfStudents={numOfStudents}
+        />
       )}
       {enteredStudents && (
         <>

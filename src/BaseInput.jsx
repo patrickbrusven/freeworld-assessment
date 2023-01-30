@@ -1,19 +1,32 @@
-const BaseInput = (props) => {
+import { forwardRef } from "react";
+
+const BaseInput = forwardRef((props, ref) => {
   const {
+    label = "example label",
     placeholder = "example placeholder",
     type = "text",
+    name,
     inputChanged,
     inputValue,
+    autoFocus,
   } = props;
   const handleInput = (e) => {
-    inputChanged(e.target.value);
+    inputChanged(e);
   };
   return (
     <label>
-      {placeholder}
-      <input type={type} value={inputValue} onChange={handleInput} />
+      {label}
+      <input
+        autoFocus={autoFocus}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={inputValue}
+        onChange={handleInput}
+        ref={ref}
+      />
     </label>
   );
-};
+});
 
 export default BaseInput;
