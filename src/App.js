@@ -33,7 +33,7 @@ const testData = [
 
 function App() {
   const [data, setData] = useState(null);
-  const [enteringData, setEnteringData] = useState(false);
+  const [enteringData, setEnteringStudents] = useState(false);
 
   // constraints logic
   const [maxCreditHours, setMaxCreditHours] = useState("");
@@ -42,18 +42,18 @@ function App() {
   const handleConstraints = (constraints) => {
     setMaxCreditHours(constraints.maxCreditHours);
     setNumOfStudents(constraints.numOfStudents);
-    setEnteringData(true);
+    setEnteringStudents(true);
   };
 
   // enter student data logic
   const [enteredStudents, setEnteredStudents] = useState([]);
 
-  const handleSubmitedStudent = (student) => {
+  const handleStudent = (student) => {
     setEnteredStudents((current) => {
       const newStudentArray = [...current, student];
       if (newStudentArray.length === parseInt(numOfStudents)) {
         setData(newStudentArray);
-        setEnteringData(false);
+        setEnteringStudents(false);
       }
       return newStudentArray;
     });
@@ -64,7 +64,7 @@ function App() {
     setData(null);
     setMaxCreditHours("");
     setNumOfStudents("");
-    setEnteringData(false);
+    setEnteringStudents(false);
   };
 
   return (
@@ -72,7 +72,7 @@ function App() {
       <EnterConstraints handleSubmitedConstraints={handleConstraints} />
       {enteringData && (
         <EnterStudent
-          handleSubmitedStudent={handleSubmitedStudent}
+          handleSubmitedStudent={handleStudent}
           enteredStudents={enteredStudents}
           numOfStudents={numOfStudents}
         />
