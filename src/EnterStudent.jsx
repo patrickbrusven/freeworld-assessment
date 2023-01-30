@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import BaseInput from "./BaseInput";
 
 function EnterStudent({
@@ -9,6 +9,7 @@ function EnterStudent({
   const [studentName, setStudentName] = useState("");
   const [studentEarnings, setStudentEarnings] = useState("");
   const [studentHours, setStudentHours] = useState("");
+  const firstInput = useRef(null);
 
   const handleNamechange = (string) => {
     setStudentName(string);
@@ -20,33 +21,39 @@ function EnterStudent({
     setStudentHours(num);
   };
 
-  const submitStudent = () => {
+  const submitStudent = (e) => {
+    e.preventDefault();
     handleSubmitedStudent(studentName, studentEarnings, studentHours);
     setStudentName("");
     setStudentEarnings("");
     setStudentHours("");
+    firstInput.current.focus();
   };
   return (
     <>
       <p>
         entering student {enteredStudents.length + 1} / {numOfStudents}
       </p>
-      <BaseInput
-        placeholder="Name"
-        inputChanged={handleNamechange}
-        inputValue={studentName}
-      />
-      <BaseInput
-        placeholder="Earnings Potential"
-        inputChanged={handleEarningschange}
-        inputValue={studentEarnings}
-      />
-      <BaseInput
-        placeholder="Instruction Hours Needed"
-        inputChanged={handleHourschange}
-        inputValue={studentHours}
-      />
-      <button onClick={submitStudent}>Submit Student</button>
+      <form onSubmit={submitStudent} id="enterStudentForm">
+        <BaseInput
+          autoFocus={true}
+          placeholder="Name"
+          inputChanged={handleNamechange}
+          inputValue={studentName}
+          ref={firstInput}
+        />
+        <BaseInput
+          placeholder="Earnings Potential"
+          inputChanged={handleEarningschange}
+          inputValue={studentEarnings}
+        />
+        <BaseInput
+          placeholder="Instruction Hours Needed"
+          inputChanged={handleHourschange}
+          inputValue={studentHours}
+        />
+        <button type="submit">Submit Student</button>
+      </form>
     </>
   );
 }
