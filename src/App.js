@@ -32,14 +32,6 @@ function App() {
     });
   };
 
-  const handleClearData = () => {
-    setEnteredStudents([]);
-    setData(null);
-    setMaxCreditHours("");
-    setNumOfStudents("");
-    setEnteringStudents(false);
-  };
-
   return (
     <div className="App">
       {maxCreditHours && numOfStudents ? (
@@ -85,7 +77,17 @@ function App() {
             potentialStudents={data}
             totalHours={maxCreditHours}
           />
-          <button onClick={handleClearData}>Clear Data</button>
+          <button
+            onClick={() => {
+              setEnteredStudents([]);
+              setData(null);
+              setMaxCreditHours("");
+              setNumOfStudents("");
+              setEnteringStudents(false);
+            }}
+          >
+            Clear Data
+          </button>
         </>
       )}
     </div>
