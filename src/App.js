@@ -40,11 +40,11 @@ function App() {
   const [maxCreditHours, setMaxCreditHours] = useState("");
   const [numOfStudents, setNumOfStudents] = useState("");
 
-  const handleMaxHoursChanged = (num) => {
-    setMaxCreditHours(num);
+  const handleMaxHoursChanged = (e) => {
+    setMaxCreditHours(e.target.value);
   };
-  const handleNumOfStudentsChanged = (num) => {
-    setNumOfStudents(num);
+  const handleNumOfStudentsChanged = (e) => {
+    setNumOfStudents(e.target.value);
   };
   const handleProceede = () => {
     setEnteringData(true);
@@ -54,15 +54,8 @@ function App() {
   const [enteredStudents, setEnteredStudents] = useState([]);
 
   const handleSubmitedStudent = (
-    studentName,
-    studentEarnings,
-    studentHours
+    student
   ) => {
-    const student = {
-      name: studentName,
-      earnings: parseInt(studentEarnings),
-      hours: parseInt(studentHours),
-    };
     setEnteredStudents((current) => {
       const newStudentArray = [...current, student];
       if (newStudentArray.length === parseInt(numOfStudents)) {

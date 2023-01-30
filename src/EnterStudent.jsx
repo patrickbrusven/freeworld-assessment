@@ -1,32 +1,33 @@
 import { useState, useRef } from "react";
 import BaseInput from "./BaseInput";
 
+const initialValues = {
+  studentName: "",
+  studentEarnings: "",
+  studentHours: "",
+};
+
 function EnterStudent({
   handleSubmitedStudent,
   enteredStudents,
   numOfStudents,
 }) {
-  const [studentName, setStudentName] = useState("");
-  const [studentEarnings, setStudentEarnings] = useState("");
-  const [studentHours, setStudentHours] = useState("");
+  const [studentValues, setStudentValues] = useState(initialValues);
   const firstInput = useRef(null);
 
-  const handleNamechange = (string) => {
-    setStudentName(string);
-  };
-  const handleEarningschange = (num) => {
-    setStudentEarnings(num);
-  };
-  const handleHourschange = (num) => {
-    setStudentHours(num);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setStudentValues({ ...studentValues, [name]: value });
   };
 
   const submitStudent = (e) => {
     e.preventDefault();
-    handleSubmitedStudent(studentName, studentEarnings, studentHours);
-    setStudentName("");
-    setStudentEarnings("");
-    setStudentHours("");
+    handleSubmitedStudent({
+      name: studentValues.studentName,
+      earnings: parseInt(studentValues.studentEarnings),
+      hours: parseInt(studentValues.studentHours),
+    });
+    setStudentValues(initialValues);
     firstInput.current.focus();
   };
   return (
@@ -39,28 +40,31 @@ function EnterStudent({
           autoFocus={true}
           label="Name"
           placeholder="John"
-          inputChanged={handleNamechange}
-          inputValue={studentName}
+          name="studentName"
+          inputChanged={handleInputChange}
+          inputValue={studentValues.studentName}
           ref={firstInput}
         />
         <BaseInput
           label="Earnings Potential"
           placeholder="$1,000"
-          inputChanged={handleEarningschange}
-          inputValue={studentEarnings}
+          name="studentEarnings"
+          inputChanged={handleInputChange}
+          inputValue={studentValues.studentEarnings}
         />
         <BaseInput
           label="Instruction Hours Needed"
           placeholder="5"
-          inputChanged={handleHourschange}
-          inputValue={studentHours}
+          name="studentHours"
+          inputChanged={handleInputChange}
+          inputValue={studentValues.studentHours}
         />
         <button
           type="submit"
           disabled={
-            !studentName.length ||
-            !studentEarnings.length ||
-            !studentHours.length
+            !studentValues.studentName.length ||
+            !studentValues.studentEarnings.length ||
+            !studentValues.studentHours.length
               ? true
               : false
           }
