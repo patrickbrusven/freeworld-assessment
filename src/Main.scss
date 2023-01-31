@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app-heading {
+  color: white;
+  background: black;
+  padding: 25px 16px;
+}
+.freeworld-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  input {
+    padding: 16px 16px;
+    border-style: solid;
+    border-width: 0 0 2px;
+    border-color: #000;
+    border-radius: 0;
+    transition: border-color 0.2s;
+    font-size: 18px;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.base-button {
+  background-color: transparent;
+  font-size: 18px;
+  color: #000;
+  padding: 16px 40px;
+  border: 2px solid #131313;
+  border-radius: 0;
+  font-weight: 700;
+  text-align: center;
+  transition: color 0.2s, background-color 0.2s;
+  &--enabled {
+    cursor: pointer;
+    &:hover,
+    &:focus {
+      background-color: #131313;
+      color: #fff;
+    }
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  &--disabled {
+    cursor: not-allowed;
+    background-color: #ececec;
+    border-color: #808080;
+    color: #808080;
+  }
+}
+
+.form-wrapper {
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+
+.constraints-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+  margin: 0px 16px;
+  padding: 16px 0px;
+  font-size: 18px;
+  border-bottom: 2px solid black;
+}
+
+.best-combination {
+  background-color: black;
+  padding: 16px 16px;
+  color: white;
+  margin: 36px 0px;
+  h2 {
+    font-weight: 700;
+  }
+  P {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+table,
+th,
+td {
+  border: 2px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 36px 16px;
+  th,
+  td {
+    padding: 5px;
+  }
+}

@@ -31,14 +31,15 @@ function EnterStudent({
     firstInput.current.focus();
   };
   return (
-    <>
-      <p>
-        Entering student: {enteredStudents.length + 1} / {numOfStudents}
-      </p>
-      <form onSubmit={submitStudent} id="enterStudentForm">
+    <div className="form-wrapper">
+      <h2>
+        Entering Student: {enteredStudents.length + 1} of {numOfStudents}
+      </h2>
+      <form onSubmit={submitStudent} id="enterStudentForm" className="flex-container">
         <BaseInput
           autoFocus={true}
-          label="Name"
+          className="freeworld-input"
+          label="Name:"
           placeholder="John"
           name="studentName"
           inputChanged={handleInputChange}
@@ -46,14 +47,16 @@ function EnterStudent({
           ref={firstInput}
         />
         <BaseInput
-          label="Earnings Potential"
+          className="freeworld-input"
+          label="Earnings Potential:"
           placeholder="$1,000"
           name="studentEarnings"
           inputChanged={handleInputChange}
           inputValue={studentValues.studentEarnings}
         />
         <BaseInput
-          label="Instruction Hours Needed"
+          className="freeworld-input"
+          label="Instruction Hours Needed:"
           placeholder="5"
           name="studentHours"
           inputChanged={handleInputChange}
@@ -61,6 +64,13 @@ function EnterStudent({
         />
         <button
           type="submit"
+          className={
+            !studentValues.studentName.length ||
+            !studentValues.studentEarnings.length ||
+            !studentValues.studentHours.length
+              ? "base-button base-button--disabled"
+              : "base-button base-button--enabled"
+          }
           disabled={
             !studentValues.studentName.length ||
             !studentValues.studentEarnings.length ||
@@ -74,7 +84,7 @@ function EnterStudent({
             : "Add Student"}
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

@@ -5,16 +5,21 @@ function BestCombination({ potentialStudents, totalHours }) {
   return (
     <>
       {bestCombination && (
-        <>
-          <h3>Students that have max earning potential for this cohort</h3>
-          <ul>
+        <div className="flex-container best-combination">
+          <h2>Max Earning Potential</h2>
+          <p>
+            Max Earnings of ${bestCombination.possibleEarnings} with{" "}
             {bestCombination.possibleCombination.map((student, index) => (
-              <li key={index}>{student.name}</li>
+              <span key={index}>
+                {index + 1 !== bestCombination.possibleCombination.length
+                  ? `${student.name}, `
+                  : bestCombination.possibleCombination.length === 1
+                  ? `${student.name}.`
+                  : `and ${student.name}.`}
+              </span>
             ))}
-          </ul>
-          <p>Max Potential Earnings: ${bestCombination.possibleEarnings}</p>
-          <p>Total Hours: {bestCombination.totalHours}</p>
-        </>
+          </p>
+        </div>
       )}
     </>
   );

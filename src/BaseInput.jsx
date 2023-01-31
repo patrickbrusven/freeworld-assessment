@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 
 const BaseInput = forwardRef((props, ref) => {
   const {
+    className,
     label = "example label",
     placeholder = "example placeholder",
     type = "text",
@@ -14,7 +15,7 @@ const BaseInput = forwardRef((props, ref) => {
     inputChanged(e);
   };
   return (
-    <label>
+    <label className={className}>
       {label}
       <input
         autoFocus={autoFocus}

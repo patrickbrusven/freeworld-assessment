@@ -1,4 +1,4 @@
-import "./App.css";
+import "./Main.scss";
 import { useState } from "react";
 import EnterConstraints from "./EnterConstraints";
 import EnterStudent from "./EnterStudent";
@@ -34,11 +34,12 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className="app-heading">Optimize Candidate Selection</h1>
       {maxCreditHours && numOfStudents ? (
-        <>
+        <div className="constraints-section">
           <p>Max Credit Hours: {maxCreditHours}</p>
           <p>Total number of Students: {numOfStudents}</p>
-        </>
+        </div>
       ) : (
         <EnterConstraints handleSubmitedConstraints={handleConstraints} />
       )}
@@ -77,17 +78,20 @@ function App() {
             potentialStudents={data}
             totalHours={maxCreditHours}
           />
-          <button
-            onClick={() => {
-              setEnteredStudents([]);
-              setData(null);
-              setMaxCreditHours("");
-              setNumOfStudents("");
-              setEnteringStudents(false);
-            }}
-          >
-            Clear Data
-          </button>
+          <div className="center-container">
+            <button
+              className="base-button base-button--enabled"
+              onClick={() => {
+                setEnteredStudents([]);
+                setData(null);
+                setMaxCreditHours("");
+                setNumOfStudents("");
+                setEnteringStudents(false);
+              }}
+            >
+              Clear Data
+            </button>
+          </div>
         </>
       )}
     </div>
