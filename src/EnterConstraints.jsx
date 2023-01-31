@@ -10,7 +10,12 @@ function EnterConstraints({ handleSubmitedConstraints }) {
   const [constraints, setConstraints] = useState(initialValues);
   const handleInputChange = (e) => {
     let { name, value } = e.target;
-    let number = value.replace(/[^0-9]/g, "");
+    let number;
+    if (value.length === 1) {
+      number = value.replace(/[^1-9]/g, "");
+    } else {
+      number = value.replace(/[^0-9]/g, "");
+    }
     setConstraints({ ...constraints, [name]: number });
   };
   const submitConstraints = (e) => {
