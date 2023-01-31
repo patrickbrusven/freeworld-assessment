@@ -9,8 +9,9 @@ const initialValues = {
 function EnterConstraints({ handleSubmitedConstraints }) {
   const [constraints, setConstraints] = useState(initialValues);
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setConstraints({ ...constraints, [name]: value });
+    let { name, value } = e.target;
+    let number = value.replace(/[^0-9]/g, "");
+    setConstraints({ ...constraints, [name]: number });
   };
   const submitConstraints = (e) => {
     e.preventDefault();
@@ -21,9 +22,7 @@ function EnterConstraints({ handleSubmitedConstraints }) {
   };
   return (
     <div className="form-wrapper">
-      <h2>
-        Enter Constraints
-      </h2>
+      <h2>Enter Constraints</h2>
       <form
         onSubmit={submitConstraints}
         id="enterConstraintsForm"
@@ -34,6 +33,7 @@ function EnterConstraints({ handleSubmitedConstraints }) {
           label="Max Credit Hours:"
           placeholder="20"
           name="maxCreditHours"
+          type="tel"
           inputChanged={handleInputChange}
           inputValue={constraints.maxCreditHours}
         />

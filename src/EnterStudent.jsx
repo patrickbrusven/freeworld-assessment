@@ -16,7 +16,10 @@ function EnterStudent({
   const firstInput = useRef(null);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name !== "studentName") {
+      value = value.replace(/[^0-9]/g, "");
+    }
     setStudentValues({ ...studentValues, [name]: value });
   };
 
@@ -35,7 +38,11 @@ function EnterStudent({
       <h2>
         Entering Student: {enteredStudents.length + 1} of {numOfStudents}
       </h2>
-      <form onSubmit={submitStudent} id="enterStudentForm" className="flex-container">
+      <form
+        onSubmit={submitStudent}
+        id="enterStudentForm"
+        className="flex-container"
+      >
         <BaseInput
           autoFocus={true}
           className="freeworld-input"
