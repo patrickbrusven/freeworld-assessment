@@ -78,17 +78,20 @@ function App() {
             potentialStudents={data}
             totalHours={maxCreditHours}
           />
-          <button
-            onClick={() => {
-              setEnteredStudents([]);
-              setData(null);
-              setMaxCreditHours("");
-              setNumOfStudents("");
-              setEnteringStudents(false);
-            }}
-          >
-            Clear Data
-          </button>
+          <div className="center-container">
+            <button
+              className="base-button base-button--enabled"
+              onClick={() => {
+                setEnteredStudents([]);
+                setData(null);
+                setMaxCreditHours("");
+                setNumOfStudents("");
+                setEnteringStudents(false);
+              }}
+            >
+              Clear Data
+            </button>
+          </div>
         </>
       )}
     </div>

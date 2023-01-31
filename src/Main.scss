@@ -82,3 +82,22 @@
   font-size: 18px;
   border-bottom: 2px solid black;
 }
+
+.best-combination {
+  background-color: black;
+  padding: 16px 16px;
+  color: white;
+  margin: 36px 0px;
+  h2 {
+    font-weight: 700;
+  }
+  P {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+}
