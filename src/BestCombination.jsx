@@ -3,9 +3,9 @@ const USDollar = new Intl.NumberFormat("en-US", {});
 function BestCombination({ potentialStudents, totalHours }) {
   const bestCombination = useBestCombination(potentialStudents, totalHours);
   return (
-    <>
-      {bestCombination && (
-        <div className="flex-container best-combination">
+    <><div className="flex-container best-combination">
+      {bestCombination && bestCombination.possibleCombination.length >= 1 ? (
+        <>
           <h2>Max Earning Potential</h2>
           <p>
             Max Earnings of ${USDollar.format(bestCombination.possibleEarnings)}{" "}
@@ -20,8 +20,10 @@ function BestCombination({ potentialStudents, totalHours }) {
               </span>
             ))}
           </p>
-        </div>
-      )}
+        </>
+      ) : (
+        <p>There are no students that require less than {totalHours}hrs.</p>
+      )}</div>
     </>
   );
 }
