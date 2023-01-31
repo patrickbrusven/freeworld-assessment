@@ -33,7 +33,6 @@ function EnterConstraints({ handleSubmitedConstraints }) {
           label="Max Credit Hours:"
           placeholder="20"
           name="maxCreditHours"
-          type="tel"
           inputChanged={handleInputChange}
           inputValue={constraints.maxCreditHours}
         />
