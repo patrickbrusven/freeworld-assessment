@@ -4,8 +4,7 @@ import EnterConstraints from "./EnterConstraints";
 import EnterStudent from "./EnterStudent";
 import BestCombination from "./BestCombination";
 
-const USDollar = new Intl.NumberFormat("en-US", {
-});
+const USDollar = new Intl.NumberFormat("en-US", {});
 
 function App() {
   const [data, setData] = useState(null);
@@ -53,28 +52,6 @@ function App() {
           numOfStudents={numOfStudents}
         />
       )}
-      {enteredStudents && enteredStudents.length >= 1 && (
-        <>
-          <table>
-            <thead>
-              <tr>
-                <th>Students for Consideration</th>
-                <th>Earnings Potential</th>
-                <th>Instruction Hours Needed</th>
-              </tr>
-            </thead>
-            <tbody>
-              {enteredStudents.map((student, index) => (
-                <tr key={index}>
-                  <td>{student.name}</td>
-                  <td>${USDollar.format(student.earnings)}</td>
-                  <td>{student.hours}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )}
       {data && (
         <>
           <BestCombination
@@ -95,6 +72,28 @@ function App() {
               Clear Data
             </button>
           </div>
+        </>
+      )}
+      {enteredStudents && enteredStudents.length >= 1 && (
+        <>
+          <table>
+            <thead>
+              <tr>
+                <th>Students for Consideration</th>
+                <th>Earnings Potential</th>
+                <th>Instruction Hours Needed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {enteredStudents.map((student, index) => (
+                <tr key={index}>
+                  <td>{student.name}</td>
+                  <td>${USDollar.format(student.earnings)}</td>
+                  <td>{student.hours}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </>
       )}
     </div>
