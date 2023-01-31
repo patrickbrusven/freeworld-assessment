@@ -100,6 +100,7 @@
 .center-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 36px;
 }
 
 table,
@@ -111,7 +112,8 @@ td {
 table {
   border-collapse: collapse;
   margin: 36px 16px;
-  th, td {
+  th,
+  td {
     padding: 5px;
   }
 }
