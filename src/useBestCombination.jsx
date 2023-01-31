@@ -9,6 +9,12 @@ function* subsets(array, offset = 0) {
   yield [];
 }
 
+/**
+ * Find the subset of potential students that produce max earning potential without going over totalHours.
+ * @param  {Array} potentialStudents Array of student objects containing name of student, earnings, and hours needed.
+ * @param  {Number} totalHours the total hours available not to be exceededl
+ * @return {Object} containing: possibleCombination: Array of student subset, possibleEarnings: total potential earnings of subset, totalHours: total instruction hours needed of subset
+ */
 function useBestCombination(potentialStudents, totalHours) {
   const powerSetWithTotals = [];
   for (let subset of subsets(potentialStudents)) {
@@ -36,6 +42,7 @@ function useBestCombination(potentialStudents, totalHours) {
   const bestCombination = sortedData.find(
     (subset) => subset.totalHours <= totalHours
   );
+  console.log(bestCombination);
   return bestCombination;
 }
 
