@@ -4,6 +4,9 @@ import EnterConstraints from "./EnterConstraints";
 import EnterStudent from "./EnterStudent";
 import BestCombination from "./BestCombination";
 
+const USDollar = new Intl.NumberFormat("en-US", {
+});
+
 function App() {
   const [data, setData] = useState(null);
   const [enteringStudents, setEnteringStudents] = useState(false);
@@ -64,7 +67,7 @@ function App() {
               {enteredStudents.map((student, index) => (
                 <tr key={index}>
                   <td>{student.name}</td>
-                  <td>{student.earnings}</td>
+                  <td>${USDollar.format(student.earnings)}</td>
                   <td>{student.hours}</td>
                 </tr>
               ))}
