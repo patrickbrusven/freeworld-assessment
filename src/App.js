@@ -36,10 +36,10 @@ function App() {
     <div className="App">
       <h1 className="app-heading">Optimize Candidate Selection</h1>
       {maxCreditHours && numOfStudents ? (
-        <>
+        <div className="constraints-section">
           <p>Max Credit Hours: {maxCreditHours}</p>
           <p>Total number of Students: {numOfStudents}</p>
-        </>
+        </div>
       ) : (
         <EnterConstraints handleSubmitedConstraints={handleConstraints} />
       )}

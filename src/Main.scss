@@ -28,7 +28,7 @@
   }
 }
 
-.input-form {
+.flex-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -62,4 +62,23 @@
     border-color: #808080;
     color: #808080;
   }
+}
+
+.form-wrapper {
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+
+.constraints-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+  margin: 0px 16px;
+  padding: 16px 0px;
+  font-size: 18px;
+  border-bottom: 2px solid black;
 }

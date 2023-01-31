@@ -20,11 +20,14 @@ function EnterConstraints({ handleSubmitedConstraints }) {
     });
   };
   return (
-    <>
+    <div className="form-wrapper">
+      <h2>
+        Enter Constraints
+      </h2>
       <form
         onSubmit={submitConstraints}
         id="enterConstraintsForm"
-        className="input-form"
+        className="flex-container"
       >
         <BaseInput
           className="freeworld-input"
@@ -54,7 +57,7 @@ function EnterConstraints({ handleSubmitedConstraints }) {
           Proceed to Enter Students
         </button>
       </form>
-    </>
+    </div>
   );
 }
 export default EnterConstraints;
