@@ -42,7 +42,6 @@ function useBestCombination(potentialStudents, totalHours) {
   const bestCombination = sortedData.find(
     (subset) => subset.totalHours <= totalHours
   );
-  console.log(bestCombination);
   return bestCombination;
 }
 
